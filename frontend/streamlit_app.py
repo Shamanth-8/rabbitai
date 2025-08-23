@@ -118,6 +118,145 @@ scroll_anchor.markdown(
     unsafe_allow_html=True
 )
 
+# Add this right after your imports
+st.markdown("""
+<style>
+/* Base styles and dark theme */
+.stApp {
+    max-width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+    background: linear-gradient(145deg, #1a1c1e 0%, #2d333b 100%);
+}
+
+/* Responsive Typography */
+h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+    color: #64ffda !important;
+    margin-bottom: 2rem !important;
+    text-align: center;
+}
+
+.stMarkdown {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* Input Fields */
+.stTextInput input, .stSelectbox select {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(100, 255, 218, 0.2) !important;
+    border-radius: 8px !important;
+    color: #e0e0e0 !important;
+    padding: 0.5rem 1rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* File Uploader */
+.stFileUploader {
+    margin: 1rem 0;
+}
+
+.stFileUploader > div {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 2px dashed rgba(100, 255, 218, 0.3) !important;
+    border-radius: 8px !important;
+    padding: 1rem !important;
+}
+
+/* Buttons */
+.stButton > button {
+    width: 100% !important;
+    padding: 0.6rem 1rem !important;
+    background: linear-gradient(90deg, #64ffda 0%, #48bfe3 100%) !important;
+    color: #1a1c1e !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: transform 0.2s ease !important;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px) !important;
+}
+
+/* Chat Messages */
+.chat-message {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    word-wrap: break-word;
+}
+
+[data-testid="stMarkdown"] > div {
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px !important;
+    margin: 0.5rem 0 !important;
+}
+
+/* User message */
+[data-testid="stMarkdown"] > div:has(strong:contains("🧑 You:")) {
+    background: rgba(100, 255, 218, 0.1) !important;
+    border-left: 4px solid #64ffda !important;
+}
+
+/* Bot message */
+[data-testid="stMarkdown"] > div:has(strong:contains("🐇 Code Bunny:")) {
+    background: rgba(72, 191, 227, 0.1) !important;
+    border-left: 4px solid #48bfe3 !important;
+}
+
+/* JSON Display */
+.stJson {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px !important;
+    padding: 1rem !important;
+    font-size: 0.9rem !important;
+}
+
+/* Responsive Layout */
+@media screen and (max-width: 768px) {
+    .stApp {
+        padding: 0.5rem;
+    }
+    
+    .stButton > button {
+        padding: 0.8rem !important;
+    }
+    
+    [data-testid="stMarkdown"] > div {
+        padding: 0.5rem !important;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #64ffda;
+    border-radius: 3px;
+}
+
+/* Loading Animation */
+.stSpinner > div {
+    border-color: #64ffda !important;
+}
+
+/* Error and Warning Messages */
+.stAlert {
+    border-radius: 8px !important;
+    padding: 0.75rem !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 if __name__ == "__main__":
     import subprocess
     import sys
