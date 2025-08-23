@@ -4,6 +4,72 @@ import requests
 API_URL = "http://127.0.0.1:8000/analyze"
 CODE_BUNNY_URL = "http://127.0.0.1:8000/code-bunny"
 
+# --- Custom CSS ---
+st.markdown("""
+<style>
+/* General Styles */
+body {
+    color: #E0E0E0;
+}
+.stApp {
+    background-color: #1E1E1E;
+    border-radius: 15px;
+    padding: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+h1 {
+    color: #FFA726; /* A nice orange */
+    text-align: center;
+    font-family: 'monospace';
+    letter-spacing: 3px;
+}
+h2, h3 {
+    color: #81D4FA; /* Light blue */
+}
+/* --- Button Styles --- */
+.stButton>button {
+    border: 2px solid #FFA726;
+    background-color: transparent;
+    color: #FFA726;
+    padding: 10px 24px;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
+.stButton>button:hover {
+    background-color: #FFA726;
+    color: #1E1E1E;
+    border-color: #FFA726;
+}
+.stButton>button:active {
+    transform: scale(0.95);
+}
+/* --- Input & Uploader Styles --- */
+.stTextInput>div>div>input, .stFileUploader>div, .stSelectbox>div {
+    border: 2px solid #81D4FA;
+    background-color: #333333;
+    color: #E0E0E0;
+    border-radius: 10px;
+}
+.stFileUploader>div>button {
+    border: none;
+    background-color: #81D4FA;
+    color: #1E1E1E;
+}
+/* --- Chat Styles --- */
+[data-testid="stChatMessage"] {
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+[data-message-author-role="user"] > div > div {
+    background-color: #4CAF50; /* A shade of green */
+}
+[data-message-author-role="assistant"] > div > div {
+    background-color: #03A9F4; /* A shade of blue */
+}
+</style>
+""", unsafe_allow_html=True)
+
 st.title("Code Bunny")
 
 problem = st.text_input("Enter the problem and your approach")
@@ -48,7 +114,7 @@ if st.button("Submit for Analysis"):
                 files={"file": uploaded_file},
                 data=data)
 
-            if response.status_code == 200:
+            if response.status_code == 2.00:
                 result = response.json()
                 st.session_state.analysis_result = result
                 st.session_state.chat_history = []  # reset chat when new analysis runs
@@ -94,29 +160,16 @@ if st.button("Send to Code Bunny"):
                 st.error(f"Error from Code Bunny: {response.status_code}")
         except Exception as e:
             st.error(f"Request failed: {e}")
+
 # --- Show chat history ---
-chat_container = st.container()
+for msg in st.session_state.chat_history:
+    if msg["role"] == "user":
+        with st.chat_message("user", avatar="🧑"):
+            st.markdown(msg["content"])
+    else:
+        with st.chat_message("assistant", avatar="🐇"):
+            st.markdown(msg["content"])
 
-with chat_container:
-    for msg in st.session_state.chat_history:
-        if msg["role"] == "user":
-            st.markdown(f"**🧑 You:** {msg['content']}")
-        else:
-            st.markdown(f"**🐇 Code Bunny:** {msg['content']}")
-
-# Add an empty placeholder at the end
-scroll_anchor = st.empty()
-
-# Force scroll into view using a tiny JS snippet
-scroll_anchor.markdown(
-    """
-    <script>
-    var chatDiv = window.parent.document.querySelector('.app');
-    chatDiv.scrollTo(0, chatDiv.scrollHeight);
-    </script>
-    """,
-    unsafe_allow_html=True
-)
 
 if __name__ == "__main__":
     import subprocess
@@ -125,7 +178,7 @@ if __name__ == "__main__":
     print("🌐 Frontend will be available at: http://127.0.0.1:8501")
     print("Press Ctrl+C to stop the app")
     subprocess.run([
-        sys.executable, "-m", "streamlit", "run", 
+        sys.executable, "-m", "streamlit", "run",
         __file__,
         "--server.port", "8501"
     ])
