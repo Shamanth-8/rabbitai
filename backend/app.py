@@ -20,8 +20,24 @@ API_KEY = os.getenv("GOOGLE_API_KEY")
 if not API_KEY:
     raise ValueError("GOOGLE_API_KEY environment variable not set")
 
-app = FastAPI()
+app = FastAPI(
+    title="Code Bunny API",
+    description="AI-powered code analysis and chat assistant",
+    version="1.0.0"
+)
 genai.configure(api_key=API_KEY)
+
+@app.get("/")
+async def root():
+    return {
+        "message": "Welcome to Code Bunny API! 🐇✨",
+        "endpoints": {
+            "analyze": "/analyze",
+            "code_bunny": "/code-bunny",
+            "docs": "/docs"
+        },
+        "status": "running"
+    }
 
 class BunnyRequest(BaseModel):
     analysis_result: dict

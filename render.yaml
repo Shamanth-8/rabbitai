@@ -19,6 +19,6 @@ services:
     startCommand: streamlit run frontend/streamlit_app.py --server.port $PORT --server.address 0.0.0.0
     envVars:
       - key: BACKEND_URL
-        value: https://code-bunny-backend.onrender.com
+        value: https://rabbitai-3.onrender.com
       - key: PYTHON_VERSION
         value: 3.11.0
