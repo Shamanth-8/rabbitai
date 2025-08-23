@@ -117,3 +117,15 @@ scroll_anchor.markdown(
     """,
     unsafe_allow_html=True
 )
+
+if __name__ == "__main__":
+    import subprocess
+    import sys
+    print("🎨 Starting Code Bunny Frontend...")
+    print("🌐 Frontend will be available at: http://127.0.0.1:8501")
+    print("Press Ctrl+C to stop the app")
+    subprocess.run([
+        sys.executable, "-m", "streamlit", "run", 
+        __file__,
+        "--server.port", "8501"
+    ])
