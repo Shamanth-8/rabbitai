@@ -1,8 +1,9 @@
-import openai
+from google import genai
 
-openai.api_key = "YOUR_OPENAI_KEY"
+client = genai.Client(api_key="AIzaSyBQ2qaFxiWx8VG2VRbk6VNuGqrtbQvALB4")
 
-def explain_code(code: str, analysis: dict):
+
+def explain_code(code: str, analysis: dict, problem: str, level: str):
     prompt = f"""
     Analyze the following Python code:
     {code}
@@ -14,11 +15,11 @@ def explain_code(code: str, analysis: dict):
     1. Summarize what the code does.
     2. Suggest improvements.
     3. Recommend learning topics.
+
+    This is for {level} level users and the problem is {problem}
     """
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=400
-    )
-    return response["choices"][0]["message"]["content"]
+    response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents=prompt)
+    return response.text
