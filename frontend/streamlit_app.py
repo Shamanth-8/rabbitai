@@ -1,8 +1,9 @@
 import streamlit as st
 import requests
+import os
 
-API_URL = "http://127.0.0.1:8000/analyze"
-CODE_BUNNY_URL = "http://127.0.0.1:8000/code-bunny"
+API_URL = os.getenv('API_URL', 'http://127.0.0.1:8000/analyze')
+CODE_BUNNY_URL = API_URL.replace('/analyze', '/code-bunny')
 
 st.title("Code Bunny")
 
