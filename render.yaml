@@ -12,7 +12,7 @@ services:
     name: code-bunny-frontend
     runtime: python3.9
     buildCommand: pip install -r requirements.txt
-    startCommand: cd frontend && streamlit run streamlit_app.py --server.port $PORT
+    startCommand: cd frontend && streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0
     envVars:
       - key: API_URL
         value: https://code-bunny-backend.onrender.com
