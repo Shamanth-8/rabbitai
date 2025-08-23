@@ -7,8 +7,9 @@ BACKEND_URL = os.getenv('BACKEND_URL', 'http://127.0.0.1:8000')
 API_URL = f"{BACKEND_URL}/analyze"
 CODE_BUNNY_URL = f"{BACKEND_URL}/code-bunny"
 
-# Debug: Show the backend URL being used
-st.sidebar.info(f"🔗 Backend: {BACKEND_URL}")
+# Show backend status in sidebar
+st.sidebar.success("🟢 Backend Connected")
+st.sidebar.info(f"🔗 API: {BACKEND_URL}")
 
 st.title("Code Bunny")
 
