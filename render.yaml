@@ -1,18 +1,24 @@
 services:
   - type: web
     name: code-bunny-backend
-    runtime: python3.9
+    env: python
+    plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: cd backend && uvicorn app:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: GOOGLE_API_KEY
         sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.0
 
   - type: web
     name: code-bunny-frontend
-    runtime: python3.9
+    env: python
+    plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: cd frontend && streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0
+    startCommand: streamlit run frontend/streamlit_app.py --server.port $PORT --server.address 0.0.0.0
     envVars:
-      - key: API_URL
+      - key: BACKEND_URL
         value: https://code-bunny-backend.onrender.com
+      - key: PYTHON_VERSION
+        value: 3.11.0

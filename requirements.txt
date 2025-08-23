@@ -9,3 +9,6 @@ radon>=6.0.0
 # Frontend dependencies
 streamlit>=1.28.0
 requests>=2.31.0
+
+# Additional deployment dependencies
+gunicorn>=21.0.0
