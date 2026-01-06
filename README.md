@@ -90,8 +90,8 @@ rabbitai/
 - `POST /analyze` - Analyze uploaded code
 - `POST /code-bunny` - Chat with Code Bunny
 
-## Requirements
+## live demo -- https://code-bunny-frontend-gozt.onrender.com/
 
 - Python 3.8+
 - Google Gemini API key
-- Internet connection for AI features
+- Internet connection for AI feature
