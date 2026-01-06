@@ -92,6 +92,8 @@ rabbitai/
 
 ## live demo -- https://code-bunny-frontend-gozt.onrender.com/
 
+## Requirements
+
 - Python 3.8+
 - Google Gemini API key
 - Internet connection for AI feature
